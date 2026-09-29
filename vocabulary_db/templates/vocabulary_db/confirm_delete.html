@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col-5">
+    <h2 class="mb-4">Confirmer la suppression</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Oui, supprimer" class="btn btn-danger">
+        <a href="{% url cancel_url %}" class="btn btn-outline-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

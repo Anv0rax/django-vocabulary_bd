@@ -1,0 +1,14 @@
+html {
+    overflow-y: scroll;
+}
+
+header .hd-navlink {
+    color: white;
+    font-size: calc(1.25rem + .26vw);;
+}
+
+header .hd-navlink:hover, header .hd-navlink-here {
+    color: grey;
+    transform: scale(1.2);
+    transition: transform 150ms;
+}
