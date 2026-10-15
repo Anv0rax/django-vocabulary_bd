@@ -12,3 +12,8 @@ header .hd-navlink:hover, header .hd-navlink-here {
     transform: scale(1.2);
     transition: transform 150ms;
 }
+
+.list-thumbnail {
+    max-height: 40px;
+    width: auto;
+}

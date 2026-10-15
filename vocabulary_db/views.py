@@ -10,8 +10,8 @@ class IndexView(View) :
         # messages.success(request, "Profile updated successfully!")
         # messages.error(request, "Profile updated successfully!")
         
-        # return render(request, 'vocabulary_db/index.html')
-        return redirect('words')
+        # return render(request, "vocabulary_db/index.html")
+        return redirect("words")
     
 class ConfirmDelete(View) :
     model = None
@@ -21,10 +21,10 @@ class ConfirmDelete(View) :
     def get(self, request, pk) :
         obj = get_object_or_404(self.model, pk=pk)
         context = {
-            'object' : obj,
-            'cancel_url' : self.list_name,
+            "object" : obj,
+            "cancel_url" : self.list_name,
         }
-        return render(request, 'vocabulary_db/confirm_delete.html', context)
+        return render(request, "vocabulary_db/confirm_delete.html", context)
 
     def post(self, request, pk) :
         obj = get_object_or_404(self.model, pk=pk)
@@ -41,12 +41,12 @@ class WordsList(View) :
         words = Word.objects.all()
 
         context = {
-            'bool_navbar' : True,
-            'words' : words,
-            'active' : 'words',
+            "bool_navbar" : True,
+            "words" : words,
+            "active" : "words",
         }
 
-        return render(request, 'vocabulary_db/words.html', context)
+        return render(request, "vocabulary_db/words.html", context)
 
 # class MyFormView(View): # https://docs.djangoproject.com/en/6.1/topics/class-based-views/intro/
 #     form_class = MyForm
@@ -71,20 +71,20 @@ class AddWord(View) :
 
     def get(self, request) :
         context = {
-            'form' : self.class_form(),
-            'cancel_url' : 'words'
+            "form" : self.class_form(),
+            "cancel_url" : "words"
         }
-        return render(request, 'vocabulary_db/crud_form.html', context)
+        return render(request, "vocabulary_db/crud_form.html", context)
 
     def post(self, request) :
         form = self.class_form(request.POST)
         if form.is_valid() :
             form.save()
             messages.success(request, "Le mot est bien ajouté à la liste !")
-            return redirect('words')
+            return redirect("words")
         else : 
             messages.error(request, "Formulaire non valide !")
-            return redirect('add_word')
+            return redirect("add_word")
 
 class EditWord(View) : 
     class_form = WordForm
@@ -92,13 +92,13 @@ class EditWord(View) :
     def get(self, request, pk) :
         word = Word.objects.get(word=pk)
         context = {
-            'form' : self.class_form(instance=word),
-            'edition' : True,
-            'cancel_url' : 'words',
-            'edit_url' : 'edit_word',
-            'delete_url' : 'delete_word',
+            "form" : self.class_form(instance=word),
+            "edition" : True,
+            "cancel_url" : "words",
+            "edit_url" : "edit_word",
+            "delete_url" : "delete_word",
         }
-        return render(request, 'vocabulary_db/crud_form.html', context)
+        return render(request, "vocabulary_db/crud_form.html", context)
 
     def post(self, request, pk) :
         word = Word.objects.get(word=pk)
@@ -106,14 +106,14 @@ class EditWord(View) :
         if form.is_valid() :
             form.save()
             messages.success(request, "Le mot est mis à jour !")
-            return redirect('words')
+            return redirect("words")
         else : 
             messages.error(request, "Mise à jour invalide !")
-            return redirect('edit_word', pk=pk)
+            return redirect("edit_word", pk=pk)
 
 class DeleteWord(ConfirmDelete) :
     model = Word
-    list_name = 'words'
+    list_name = "words"
     message = "Le mot est supprimé !"
 
 # =====================================
@@ -123,45 +123,47 @@ class DeleteWord(ConfirmDelete) :
 class SourcesList(View) :
     def get(self, request) :
         context = {
-            'bool_navbar' : True,
-            'title' : 'Liste des sources',
-            'items' : Source.objects.all(),
-            'add_url' : 'add_source',
-            'edit_url' : 'edit_source',
-            'delete_url' : 'delete_source',
-            'active' : 'sources',
+            "bool_navbar" : True,
+            "title" : "Liste des sources",
+            "items" : Source.objects.all(),
+            "add_url" : "add_source",
+            "edit_url" : "edit_source",
+            "delete_url" : "delete_source",
+            "active" : "sources",
+            "sourced" : True,
         }
-        return render(request, 'vocabulary_db/list_simple.html', context)
+        return render(request, "vocabulary_db/list_simple.html", context)
 
 class SourceInfo(View) : 
     def get(self, request, pk) :
         source = get_object_or_404(Source, pk=pk)
         context = {
-            'bool_navbar' : True,
-            'source' : source,
-            'words' : source.words.all(),
+            "bool_navbar" : True,
+            "source" : source,
+            "words" : source.words.all(),
+            "active" : "sources",
         }
-        return render(request, 'vocabulary_db/source_info.html', context)
+        return render(request, "vocabulary_db/source_info.html", context)
 
 class AddSource(View) : 
     class_form = SourceForm
 
     def get(self, request) :
         context = {
-            'form' : self.class_form(),
-            'cancel_url' : 'sources'
+            "form" : self.class_form(),
+            "cancel_url" : "sources"
         }
-        return render(request, 'vocabulary_db/crud_form.html', context)
+        return render(request, "vocabulary_db/crud_form.html", context)
 
     def post(self, request) :
         form = self.class_form(request.POST)
         if form.is_valid() :
             form.save()
             messages.success(request, "La source est bien ajouté à la liste !")
-            return redirect('sources')
+            return redirect("sources")
         else : 
             messages.error(request, "Formulaire non valide !")
-            return redirect('add_source')
+            return redirect("add_source")
 
 class EditSource(View) :
     class_form = SourceForm
@@ -169,12 +171,12 @@ class EditSource(View) :
     def get(self, request, pk) :
         source = get_object_or_404(Source, pk=pk)
         context = {
-            'form' : self.class_form(instance=source),
-            'edition' : True,
-            'cancel_url' : 'sources',
-            'delete_url' : 'delete_source',
+            "form" : self.class_form(instance=source),
+            "edition" : True,
+            "cancel_url" : "sources",
+            "delete_url" : "delete_source",
         }
-        return render(request, 'vocabulary_db/crud_form.html', context)
+        return render(request, "vocabulary_db/crud_form.html", context)
 
     def post(self, request, pk) :
         source = get_object_or_404(Source, pk=pk)
@@ -182,14 +184,14 @@ class EditSource(View) :
         if form.is_valid() :
             form.save()
             messages.success(request, "La source est mise à jour !")
-            return redirect('sources')
+            return redirect("sources")
         else :
             messages.error(request, "Mise à jour invalide !")
-            return redirect('edit_source', pk=pk)
+            return redirect("edit_source", pk=pk)
 
 class DeleteSource(ConfirmDelete) :
     model = Source
-    list_name = 'sources'
+    list_name = "sources"
     message = "La source est supprimée !"
 
 # =====================================
@@ -199,35 +201,35 @@ class DeleteSource(ConfirmDelete) :
 class AuthorsList(View) :
     def get(self, request) :
         context = {
-            'bool_navbar' : True,
-            'title' : 'Liste des auteur•ice•s',
-            'items' : Author.objects.all(),
-            'add_url' : 'add_author',
-            'edit_url' : 'edit_author',
-            'delete_url' : 'delete_author',
-            'active' : 'authors',
+            "bool_navbar" : True,
+            "title" : "Liste des auteur•ice•s",
+            "items" : Author.objects.all(),
+            "add_url" : "add_author",
+            "edit_url" : "edit_author",
+            "delete_url" : "delete_author",
+            "active" : "authors",
         }
-        return render(request, 'vocabulary_db/list_simple.html', context)
+        return render(request, "vocabulary_db/list_simple.html", context)
 
 class AddAuthor(View) :
     class_form = AuthorForm
 
     def get(self, request) :
         context = {
-            'form' : self.class_form(),
-            'cancel_url' : 'authors',
+            "form" : self.class_form(),
+            "cancel_url" : "authors",
         }
-        return render(request, 'vocabulary_db/crud_form.html', context)
+        return render(request, "vocabulary_db/crud_form.html", context)
 
     def post(self, request) :
         form = self.class_form(request.POST)
         if form.is_valid() :
             form.save()
             messages.success(request, "L'auteur•ice est bien ajouté•e à la liste !")
-            return redirect('authors')
+            return redirect("authors")
         else :
             messages.error(request, "Formulaire non valide !")
-            return redirect('add_author')
+            return redirect("add_author")
 
 class EditAuthor(View) :
     class_form = AuthorForm
@@ -235,12 +237,12 @@ class EditAuthor(View) :
     def get(self, request, pk) :
         author = get_object_or_404(Author, pk=pk)
         context = {
-            'form' : self.class_form(instance=author),
-            'edition' : True,
-            'cancel_url' : 'authors',
-            'delete_url' : 'delete_author',
+            "form" : self.class_form(instance=author),
+            "edition" : True,
+            "cancel_url" : "authors",
+            "delete_url" : "delete_author",
         }
-        return render(request, 'vocabulary_db/crud_form.html', context)
+        return render(request, "vocabulary_db/crud_form.html", context)
 
     def post(self, request, pk) :
         author = get_object_or_404(Author, pk=pk)
@@ -248,14 +250,14 @@ class EditAuthor(View) :
         if form.is_valid() :
             form.save()
             messages.success(request, "L'auteur•ice est mis•e à jour !")
-            return redirect('authors')
+            return redirect("authors")
         else :
             messages.error(request, "Mise à jour invalide !")
-            return redirect('edit_author', pk=pk)
+            return redirect("edit_author", pk=pk)
 
 class DeleteAuthor(ConfirmDelete) :
     model = Author
-    list_name = 'authors'
+    list_name = "authors"
     message = "L'auteur•ice est supprimé•e !"
 
 # =====================================
@@ -265,35 +267,35 @@ class DeleteAuthor(ConfirmDelete) :
 class TypesList(View) :
     def get(self, request) :
         context = {
-            'bool_navbar' : True,
-            'title' : 'Liste des types',
-            'items' : TypeSource.objects.all(),
-            'add_url' : 'add_type',
-            'edit_url' : 'edit_type',
-            'delete_url' : 'delete_type',
-            'active' : 'types',
+            "bool_navbar" : True,
+            "title" : "Liste des types",
+            "items" : TypeSource.objects.all(),
+            "add_url" : "add_type",
+            "edit_url" : "edit_type",
+            "delete_url" : "delete_type",
+            "active" : "types",
         }
-        return render(request, 'vocabulary_db/list_simple.html', context)
+        return render(request, "vocabulary_db/list_simple.html", context)
 
 class AddType(View) :
     class_form = TypeSourceForm
 
     def get(self, request) :
         context = {
-            'form' : self.class_form(),
-            'cancel_url' : 'add_source',
+            "form" : self.class_form(),
+            "cancel_url" : "add_source",
         }
-        return render(request, 'vocabulary_db/crud_form.html', context)
+        return render(request, "vocabulary_db/crud_form.html", context)
 
     def post(self, request) :
         form = self.class_form(request.POST)
         if form.is_valid() :
             form.save()
             messages.success(request, "Le type est bien ajouté à la liste !")
-            return redirect('add_source')
+            return redirect("add_source")
         else :
             messages.error(request, "Formulaire non valide !")
-            return redirect('add_type')
+            return redirect("add_type")
 
 class EditType(View) :
     class_form = TypeSourceForm
@@ -301,12 +303,12 @@ class EditType(View) :
     def get(self, request, pk) :
         type_source = get_object_or_404(TypeSource, pk=pk)
         context = {
-            'form' : self.class_form(instance=type_source),
-            'edition' : True,
-            'cancel_url' : 'types',
-            'delete_url' : 'delete_type',
+            "form" : self.class_form(instance=type_source),
+            "edition" : True,
+            "cancel_url" : "types",
+            "delete_url" : "delete_type",
         }
-        return render(request, 'vocabulary_db/crud_form.html', context)
+        return render(request, "vocabulary_db/crud_form.html", context)
 
     def post(self, request, pk) :
         type_source = get_object_or_404(TypeSource, pk=pk)
@@ -314,12 +316,12 @@ class EditType(View) :
         if form.is_valid() :
             form.save()
             messages.success(request, "Le type est mis à jour !")
-            return redirect('types')
+            return redirect("types")
         else :
             messages.error(request, "Mise à jour invalide !")
-            return redirect('edit_type', pk=pk)
+            return redirect("edit_type", pk=pk)
 
 class DeleteType(ConfirmDelete) :
     model = TypeSource
-    list_name = 'types'
+    list_name = "types"
     message = "Le type est supprimé !"

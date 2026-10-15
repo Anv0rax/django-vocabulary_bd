@@ -32,6 +32,7 @@ class Source(models.Model) :
     author = models.ForeignKey(Author, verbose_name="Auteur", related_name="sources", on_delete=models.SET_NULL, null=True)
     # https://stackoverflow.com/questions/38388423/what-does-on-delete-do-on-django-models
     # https://stackoverflow.com/questions/8609192/what-is-the-difference-between-null-true-and-blank-true-in-django
+    image = models.ImageField(default="", upload_to="", verbose_name="Image")
 
     class Meta : 
         ordering = ('release_date', 'title', 'id', )

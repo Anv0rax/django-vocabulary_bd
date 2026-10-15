@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
-{% block hdnav_word %} hd-navlink-here {% endblock %}
-
 {% block content %}
 
 <h2 class="mb-4">Liste des mots</h2>
@@ -38,13 +35,25 @@
                 
                     <label class="list-group-item d-flex gap-2 mt-4">
                         <strong class="card-text mb-2">Maîtrise</strong>
-                        <input class="form-check-input flex-shrink-0" type="checkbox" value="" {% if word.mastered %} checked {% endif %}> 
+                        <input class="form-check-input flex-shrink-0 opacity-100" type="checkbox" value="" disabled {% if word.mastered %} checked {% endif %}> 
                     </label>
                 
                     <strong class="card-text mt-2">Sources :</strong>
-                    <ul>
+                    <ul class="ms-1 ps-1">
                     {% for source in word.sources.all %} {# https://stackoverflow.com/questions/14920735/manyrelatedmanager-object-is-not-iterable #}
-                        <li><a href="{% url 'source' pk=source.id %}">{{ source }}</a></li>
+                        <li class="d-flex align-items-center">
+                            <span class="d-inline-block bg-black rounded-circle p-1 me-2"></span>
+                            <a href="{% url 'source' pk=source.id %}">
+                            
+                            {% if source.image %}
+                                <div class="d-flex align-items-center">
+                                    <img src="{% get_media_prefix %}{{ source.image }}" style="max-width:32px; margin-right:6px;" />
+                                    {{ source }}
+                                </div>
+                            {% else %}
+                                {{ source }}
+                            {% endif %}
+                        </a></li>
                     {% endfor %}
                     </ul>
                     
