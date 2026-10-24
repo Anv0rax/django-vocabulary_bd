@@ -1,6 +1,8 @@
 private.py
 *.simp*
 *.zip
+gettext1.0-iconv1.19-shared-64/*
+!gettext1.0-iconv1.19-shared-64/.gitkeep
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

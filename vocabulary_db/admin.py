@@ -3,7 +3,12 @@ from django.urls import reverse
 from django.utils.html import format_html, format_html_join
 from django.utils.safestring import mark_safe
 
+from modeltranslation.admin import TranslationAdmin
+from django.utils.translation import gettext, gettext_lazy as _
+
 from .models import *
+
+
 
 # Info de connexion dans private.py 
 
@@ -21,8 +26,8 @@ class AuthorAdmin(admin.ModelAdmin) :
             reverse("admin:vocabulary_db_source_changelist")
             + f"?author__id__exact={obj.id}"
         )
-        return format_html('<a href="{}">Voir les sources</a>', url)
-    view_sources_link.short_description = "Sources associés"
+        return format_html('<a href="{}">{}</a>', url, _("Voir les sources"))
+    view_sources_link.short_description = _("Sources associées")
 
 
     def get_readonly_fields(self, request, obj=None):
@@ -36,7 +41,7 @@ class AuthorAdmin(admin.ModelAdmin) :
         
         sources = obj.sources.all()
         if not sources:
-            product_links = "Aucune source associée"
+            product_links = _("Aucune source associée")
         else:
             product_links = format_html_join(
                 mark_safe("<br>"), '<a href="{}">{}</a>', (
@@ -49,17 +54,17 @@ class AuthorAdmin(admin.ModelAdmin) :
             + f"?author={obj.pk}"
         )
         add_link = format_html(
-            '<br><br><a class="addlink" href="{}">Ajouter une source</a>',
-            add_url
+            '<br><br><a class="addlink" href="{}">{}</a>',
+            add_url, _("Ajouter une source")
         )
         return format_html("{}{}", product_links, add_link)
-    source_list.short_description = "Sources associées"
+    source_list.short_description = _("Sources associées")
 
 
 
 
 @admin.register(TypeSource)
-class TypeSourceAdmin(admin.ModelAdmin) :
+class TypeSourceAdmin(TranslationAdmin) :
     list_display = ["type",] 
     ordering = ["id"]
     # readonly_fields = [""]
@@ -71,7 +76,7 @@ class TypeSourceAdmin(admin.ModelAdmin) :
 
 
 @admin.register(Source)
-class SourceAdmin(admin.ModelAdmin) :
+class SourceAdmin(TranslationAdmin) :
     list_display = ["source_with_image", "id", "type", "author", "release_date", "view_words_link"]
     ordering = ["release_date", "title", "id"]
     # readonly_fields = [""]
@@ -89,14 +94,14 @@ class SourceAdmin(admin.ModelAdmin) :
                 obj.image.url, obj.title,
             )
         return obj.title
-    source_with_image.short_description = "Titre"
+    source_with_image.short_description = _("Titre")
     source_with_image.admin_order_field = "title"
 
     def image_preview(self, obj):
         if obj.image:
             return format_html('<img src="{}" style="max-width:200px" />', obj.image.url)
-        return "Pas d'image"
-    image_preview.short_description = "Prévisualisation"
+        return _("Pas d'image")
+    image_preview.short_description = _("Prévisualisation")
 
     def get_readonly_fields(self, request, obj=None):
         if obj:
@@ -109,7 +114,7 @@ class SourceAdmin(admin.ModelAdmin) :
         
         words = obj.words.all()
         if not words:
-            product_links = "Aucun mot associé"
+            product_links = _("Aucun mot associé")
         else:
             product_links = format_html_join(
                 mark_safe("<br>"), '<a href="{}">{}</a>', (
@@ -122,21 +127,22 @@ class SourceAdmin(admin.ModelAdmin) :
             + f"?source={obj.pk}"
         )
         add_link = format_html(
-            '<br><br><a class="addlink" href="{}">Ajouter un mot</a>',
-            add_url
+            '<br><br><a class="addlink" href="{}">{}</a>',
+            add_url, _("Ajouter un mot")
         )
 
         return format_html("{}{}", product_links, add_link)
 
-    word_list.short_description = "Mots associés"
+    word_list.short_description = _("Mots associés")
 
     def view_words_link(self, obj):
         url = (
             reverse("admin:vocabulary_db_word_changelist")
             + f"?sources__id__exact={obj.id}"
         )
-        return format_html('<a href="{}">Voir les mots</a>', url)
-    view_words_link.short_description = "Mots associés"
+        return format_html('<a href="{}">{}</a>', url, _("Voir les mots"))
+    view_words_link.short_description = _("Mots associés")
+
 
 
 
@@ -144,7 +150,7 @@ class SourceAdmin(admin.ModelAdmin) :
 
 
 @admin.register(Word)
-class WordAdmin(admin.ModelAdmin) :
+class WordAdmin(TranslationAdmin) :
     list_display = ["word", "translation", "explainations", "mastered", "added"] # "__all__" 
     ordering = ["word"]
     # readonly_fields = [""]

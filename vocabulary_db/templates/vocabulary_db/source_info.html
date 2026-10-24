@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 
 <h2 class="mb-4">{{ source }}</h2>
 
-<p><strong>Type :</strong> {{ source.type|default:"X" }}</p>
-<p><strong>Date de sortie :</strong> {{ source.release_date|date:"Y-m-d" }}</p>
+<p><strong>{% trans "Type" %} :</strong> {{ source.type|default:"X" }}</p>
+<p><strong>{% trans "Date de sortie" %} :</strong> {{ source.release_date|date:"Y-m-d" }}</p>
 
-<a href="{% url 'edit_source' pk=source.pk %}" class="btn btn-primary">Editer</a>
-<a href="{% url 'delete_source' pk=source.pk %}" class="btn btn-danger">Supprimer</a>
+<a href="{% url 'edit_source' pk=source.pk %}" class="btn btn-primary">{% trans "Editer" %}</a>
+<a href="{% url 'delete_source' pk=source.pk %}" class="btn btn-danger">{% trans "Supprimer" %}</a>
 
-<h3 class="mt-4">Mots liés</h3>
+<h3 class="mt-4">{% trans "Mots liés" %}</h3>
 <ul>
     {% for word in words %}
         <li><a href="{% url 'edit_word' pk=word.word %}">{{ word.word }}</a> : {{ word.translation }}</li>
     {% empty %}
-        <li>Aucun mot</li>
+        <li>{% trans "Aucun mot" %}</li>
     {% endfor %}
 </ul>
 

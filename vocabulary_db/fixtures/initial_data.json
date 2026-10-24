@@ -1,0 +1,391 @@
+[
+{
+  "model": "vocabulary_db.author",
+  "pk": 11,
+  "fields": {
+    "name": "J.K. Rowling"
+  }
+},
+{
+  "model": "vocabulary_db.author",
+  "pk": 12,
+  "fields": {
+    "name": "J.R.R. Tolkien"
+  }
+},
+{
+  "model": "vocabulary_db.author",
+  "pk": 13,
+  "fields": {
+    "name": "Duffer Brothers"
+  }
+},
+{
+  "model": "vocabulary_db.author",
+  "pk": 14,
+  "fields": {
+    "name": "Christopher Nolan"
+  }
+},
+{
+  "model": "vocabulary_db.author",
+  "pk": 15,
+  "fields": {
+    "name": "Anonyme"
+  }
+},
+{
+  "model": "vocabulary_db.typesource",
+  "pk": 12,
+  "fields": {
+    "type": "Livre",
+    "type_fr": "Livre",
+    "type_en": "Book"
+  }
+},
+{
+  "model": "vocabulary_db.typesource",
+  "pk": 13,
+  "fields": {
+    "type": "Série",
+    "type_fr": "Série",
+    "type_en": "Serie"
+  }
+},
+{
+  "model": "vocabulary_db.typesource",
+  "pk": 14,
+  "fields": {
+    "type": "Film",
+    "type_fr": "Film",
+    "type_en": "Movie"
+  }
+},
+{
+  "model": "vocabulary_db.typesource",
+  "pk": 15,
+  "fields": {
+    "type": "Podcast",
+    "type_fr": "Podcast",
+    "type_en": "Podcast"
+  }
+},
+{
+  "model": "vocabulary_db.typesource",
+  "pk": 18,
+  "fields": {
+    "type": "?",
+    "type_fr": "?",
+    "type_en": null
+  }
+},
+{
+  "model": "vocabulary_db.source",
+  "pk": 11,
+  "fields": {
+    "title": "Harry Potter and the Philosopher's Stone",
+    "title_fr": "Harry Potter and the Philosopher's Stone",
+    "title_en": null,
+    "release_date": "1997-06-26",
+    "type": 12,
+    "author": 11,
+    "image": ""
+  }
+},
+{
+  "model": "vocabulary_db.source",
+  "pk": 12,
+  "fields": {
+    "title": "Le seigneur des anneaux",
+    "title_fr": "Le seigneur des anneaux",
+    "title_en": "The Lord of the Rings",
+    "release_date": "1954-07-29",
+    "type": 12,
+    "author": 12,
+    "image": "godot_logo_png.png"
+  }
+},
+{
+  "model": "vocabulary_db.source",
+  "pk": 13,
+  "fields": {
+    "title": "Stranger Things",
+    "title_fr": "Stranger Things",
+    "title_en": null,
+    "release_date": "2016-07-15",
+    "type": 13,
+    "author": 13,
+    "image": ""
+  }
+},
+{
+  "model": "vocabulary_db.source",
+  "pk": 14,
+  "fields": {
+    "title": "Inception",
+    "title_fr": "Inception",
+    "title_en": null,
+    "release_date": "2010-07-16",
+    "type": 14,
+    "author": 14,
+    "image": ""
+  }
+},
+{
+  "model": "vocabulary_db.source",
+  "pk": 15,
+  "fields": {
+    "title": "English Learning for Curious Minds",
+    "title_fr": "English Learning for Curious Minds",
+    "title_en": null,
+    "release_date": "2020-03-10",
+    "type": 15,
+    "author": 15,
+    "image": ""
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "ancient",
+  "fields": {
+    "translation": "ancien / antique",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": true,
+    "added": "2026-09-19T14:00:00Z",
+    "sources": [
+      12
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "cauldron",
+  "fields": {
+    "translation": "chaudron",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": false,
+    "added": "2026-08-05T13:00:00Z",
+    "sources": [
+      11
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "dream",
+  "fields": {
+    "translation": "rêve",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": true,
+    "added": "2026-08-25T12:10:00Z",
+    "sources": [
+      14
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "eerie",
+  "fields": {
+    "translation": "inquiétant / étrange",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": false,
+    "added": "2026-08-20T23:30:00Z",
+    "sources": [
+      13
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "fluent",
+  "fields": {
+    "translation": "courant / fluide",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": true,
+    "added": "2026-09-05T21:40:00Z",
+    "sources": [
+      15
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "maze",
+  "fields": {
+    "translation": "labyrinthe",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": false,
+    "added": "2026-09-01T17:00:00Z",
+    "sources": [
+      14
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "overwhelmed",
+  "fields": {
+    "translation": "submergé / dépassé",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": false,
+    "added": "2026-09-19T01:15:00Z",
+    "sources": [
+      14,
+      13
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "quest",
+  "fields": {
+    "translation": "quête",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": false,
+    "added": "2026-08-12T15:20:00Z",
+    "sources": [
+      12
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "riddle",
+  "fields": {
+    "translation": "énigme",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": true,
+    "added": "2026-09-15T19:25:00Z",
+    "sources": [
+      11
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "ring",
+  "fields": {
+    "translation": "anneau",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": true,
+    "added": "2026-08-10T20:45:00Z",
+    "sources": [
+      12
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "spell",
+  "fields": {
+    "translation": "sortilège",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": true,
+    "added": "2026-08-02T18:15:00Z",
+    "sources": [
+      11
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "upside down",
+  "fields": {
+    "translation": "à l'envers",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": true,
+    "added": "2026-08-19T00:00:00Z",
+    "sources": [
+      13
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "vocabulary",
+  "fields": {
+    "translation": "vocabulaire",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": false,
+    "added": "2026-09-08T13:50:00Z",
+    "sources": [
+      15
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "whimsical",
+  "fields": {
+    "translation": "fantasque / loufoque",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": false,
+    "added": "2026-09-12T16:00:00Z",
+    "sources": [
+      12,
+      11
+    ]
+  }
+},
+{
+  "model": "vocabulary_db.word",
+  "pk": "wizard",
+  "fields": {
+    "translation": "sorcier",
+    "explainations": null,
+    "explainations_fr": null,
+    "explainations_en": null,
+    "mastered": true,
+    "added": "2026-08-01T14:30:00Z",
+    "sources": [
+      11
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$QUTiR9QD9MD6AfGklz6ixg$jLrQBOuszO5Ulya2/hksH2RoTCN3eoDwntJUGxRNdhQ=",
+    "last_login": "2026-10-20T19:27:44.381Z",
+    "is_superuser": true,
+    "username": "anvo",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-09-17T20:38:05.762Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

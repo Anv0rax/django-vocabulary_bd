@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
-<form action="" class="form col-5 mb-5" method="POST">
+<form action="" class="form col-12 col-lg-6 mb-5" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.as_div }}
     {% if edition %}
-        <input type="submit" value="Editer" class="btn btn-success">
-        <a href="{% url cancel_url %}" class="btn btn-outline-secondary">Annuler</a>
-        <a href="{% url delete_url pk=form.instance.pk %}" class="btn btn-danger">Supprimer</a>
+        <input type="submit" value="{% trans 'Editer' %}" class="btn mt-2 btn-success">
+        <a href="{% url cancel_url %}" class="btn mt-2 btn-outline-secondary">{% trans "Annuler" %}</a>
+        <a href="{% url delete_url pk=form.instance.pk %}" class="btn mt-2 btn-danger">{% trans "Supprimer" %}</a>
     {% else %}
-        <input type="submit" value="Ajouter" class="btn btn-success">
-        <a href="{% url cancel_url %}" class="btn btn-outline-secondary">Annuler</a>
+        <input type="submit" value="{% trans 'Ajouter' %}" class="btn mt-2 btn-success">
+        <a href="{% url cancel_url %}" class="btn mt-2 btn-outline-secondary">{% trans "Annuler" %}</a>
     {% endif %}
 </form>
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import View
 from django.contrib import messages
+from django.utils.translation import gettext as _
 from .models import *
 from .forms import *
   
@@ -80,17 +81,17 @@ class AddWord(View) :
         form = self.class_form(request.POST)
         if form.is_valid() :
             form.save()
-            messages.success(request, "Le mot est bien ajouté à la liste !")
+            messages.success(request, _("Le mot est bien ajouté à la liste !"))
             return redirect("words")
         else : 
-            messages.error(request, "Formulaire non valide !")
+            messages.error(request, _("Formulaire non valide !"))
             return redirect("add_word")
 
 class EditWord(View) : 
     class_form = WordForm
 
     def get(self, request, pk) :
-        word = Word.objects.get(word=pk)
+        word = get_object_or_404(Word, word=pk)
         context = {
             "form" : self.class_form(instance=word),
             "edition" : True,
@@ -101,20 +102,20 @@ class EditWord(View) :
         return render(request, "vocabulary_db/crud_form.html", context)
 
     def post(self, request, pk) :
-        word = Word.objects.get(word=pk)
+        word = get_object_or_404(Word, word=pk)
         form = self.class_form(request.POST, instance=word)
         if form.is_valid() :
             form.save()
-            messages.success(request, "Le mot est mis à jour !")
+            messages.success(request, _("Le mot est mis à jour !"))
             return redirect("words")
         else : 
-            messages.error(request, "Mise à jour invalide !")
+            messages.error(request, _("Mise à jour invalide !"))
             return redirect("edit_word", pk=pk)
 
 class DeleteWord(ConfirmDelete) :
     model = Word
     list_name = "words"
-    message = "Le mot est supprimé !"
+    message = _("Le mot est supprimé !")
 
 # =====================================
 #               SOURCES
@@ -124,7 +125,7 @@ class SourcesList(View) :
     def get(self, request) :
         context = {
             "bool_navbar" : True,
-            "title" : "Liste des sources",
+            "title" : _("Liste des sources"),
             "items" : Source.objects.all(),
             "add_url" : "add_source",
             "edit_url" : "edit_source",
@@ -159,10 +160,10 @@ class AddSource(View) :
         form = self.class_form(request.POST)
         if form.is_valid() :
             form.save()
-            messages.success(request, "La source est bien ajouté à la liste !")
+            messages.success(request, _("La source est bien ajouté à la liste !"))
             return redirect("sources")
         else : 
-            messages.error(request, "Formulaire non valide !")
+            messages.error(request, _("Formulaire non valide !"))
             return redirect("add_source")
 
 class EditSource(View) :
@@ -183,16 +184,16 @@ class EditSource(View) :
         form = self.class_form(request.POST, instance=source)
         if form.is_valid() :
             form.save()
-            messages.success(request, "La source est mise à jour !")
+            messages.success(request, _("La source est mise à jour !"))
             return redirect("sources")
         else :
-            messages.error(request, "Mise à jour invalide !")
+            messages.error(request, _("Mise à jour invalide !"))
             return redirect("edit_source", pk=pk)
 
 class DeleteSource(ConfirmDelete) :
     model = Source
     list_name = "sources"
-    message = "La source est supprimée !"
+    message = _("La source est supprimée !")
 
 # =====================================
 #               AUTHORS
@@ -202,7 +203,7 @@ class AuthorsList(View) :
     def get(self, request) :
         context = {
             "bool_navbar" : True,
-            "title" : "Liste des auteur•ice•s",
+            "title" : _("Liste des auteur•ice•s"),
             "items" : Author.objects.all(),
             "add_url" : "add_author",
             "edit_url" : "edit_author",
@@ -225,10 +226,10 @@ class AddAuthor(View) :
         form = self.class_form(request.POST)
         if form.is_valid() :
             form.save()
-            messages.success(request, "L'auteur•ice est bien ajouté•e à la liste !")
+            messages.success(request, _("L'auteur•ice est bien ajouté•e à la liste !"))
             return redirect("authors")
         else :
-            messages.error(request, "Formulaire non valide !")
+            messages.error(request, _("Formulaire non valide !"))
             return redirect("add_author")
 
 class EditAuthor(View) :
@@ -249,16 +250,16 @@ class EditAuthor(View) :
         form = self.class_form(request.POST, instance=author)
         if form.is_valid() :
             form.save()
-            messages.success(request, "L'auteur•ice est mis•e à jour !")
+            messages.success(request, _("L'auteur•ice est mis•e à jour !"))
             return redirect("authors")
         else :
-            messages.error(request, "Mise à jour invalide !")
+            messages.error(request, _("Mise à jour invalide !"))
             return redirect("edit_author", pk=pk)
 
 class DeleteAuthor(ConfirmDelete) :
     model = Author
     list_name = "authors"
-    message = "L'auteur•ice est supprimé•e !"
+    message = _("L'auteur•ice est supprimé•e !")
 
 # =====================================
 #               TYPES
@@ -268,7 +269,7 @@ class TypesList(View) :
     def get(self, request) :
         context = {
             "bool_navbar" : True,
-            "title" : "Liste des types",
+            "title" : _("Liste des types"),
             "items" : TypeSource.objects.all(),
             "add_url" : "add_type",
             "edit_url" : "edit_type",
@@ -291,10 +292,10 @@ class AddType(View) :
         form = self.class_form(request.POST)
         if form.is_valid() :
             form.save()
-            messages.success(request, "Le type est bien ajouté à la liste !")
+            messages.success(request, _("Le type est bien ajouté à la liste !"))
             return redirect("add_source")
         else :
-            messages.error(request, "Formulaire non valide !")
+            messages.error(request, _("Formulaire non valide !"))
             return redirect("add_type")
 
 class EditType(View) :
@@ -315,13 +316,13 @@ class EditType(View) :
         form = self.class_form(request.POST, instance=type_source)
         if form.is_valid() :
             form.save()
-            messages.success(request, "Le type est mis à jour !")
+            messages.success(request, _("Le type est mis à jour !"))
             return redirect("types")
         else :
-            messages.error(request, "Mise à jour invalide !")
+            messages.error(request, _("Mise à jour invalide !"))
             return redirect("edit_type", pk=pk)
 
 class DeleteType(ConfirmDelete) :
     model = TypeSource
     list_name = "types"
-    message = "Le type est supprimé !"
+    message = _("Le type est supprimé !")

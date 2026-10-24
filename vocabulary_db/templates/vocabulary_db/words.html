@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 
-<h2 class="mb-4">Liste des mots</h2>
-<a href="{% url 'add_word' %}" class="btn btn-primary mb-4">+ Ajouter</a>
+<h2 class="mb-4">{% trans "Liste des mots" %}</h2>
+<a href="{% url 'add_word' %}" class="btn btn-primary mb-4">{% trans "+ Ajouter" %}</a>
+<a href="{% url 'add_word' %}" class="btn btn-primary mb-4 ms-2">{% trans "Flashcards" %}</a>
 
 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 justify-content-evenly">
+    {% if not words %}
+        <h3 class="d-flex align-items-center justify-content-center">{% trans "Aucun résultat" %}</h3>
+    {% endif %}
     {% for word in words %}
         <div class="col">
             <div class="card mb-3 h-100">
@@ -21,7 +26,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start">
                         <p class="card-text mb-0">
-                            <strong>Traduction :</strong> {{ word.translation }}
+                            <strong>{% trans "Traduction" %} :</strong> {{ word.translation }}
                         </p>
                         <a href="{% url 'edit_word' pk=word.word %}" class="btn btn-primary p-2 lh-1 ms-2 flex-shrink-0" type="button">
                             📝
@@ -34,11 +39,11 @@
                     {% endif %}
                 
                     <label class="list-group-item d-flex gap-2 mt-4">
-                        <strong class="card-text mb-2">Maîtrise</strong>
+                        <strong class="card-text mb-2">{% trans "Maîtrise" %}</strong>
                         <input class="form-check-input flex-shrink-0 opacity-100" type="checkbox" value="" disabled {% if word.mastered %} checked {% endif %}> 
                     </label>
                 
-                    <strong class="card-text mt-2">Sources :</strong>
+                    <strong class="card-text mt-2">{% trans "Sources" %} :</strong>
                     <ul class="ms-1 ps-1">
                     {% for source in word.sources.all %} {# https://stackoverflow.com/questions/14920735/manyrelatedmanager-object-is-not-iterable #}
                         <li class="d-flex align-items-center">
