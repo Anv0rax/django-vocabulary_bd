@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import View
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.core.paginator import Paginator
+from django.urls import reverse
+from random import randint
 from .models import *
 from .forms import *
   
@@ -40,14 +43,53 @@ class ConfirmDelete(View) :
 class WordsList(View) :
     def get(self, request) :
         words = Word.objects.all()
+        paginator = Paginator(words, 3)
 
+        page_object = paginator.get_page(request.GET.get("page"))
         context = {
             "bool_navbar" : True,
-            "words" : words,
+            "words" : page_object,
             "active" : "words",
         }
 
         return render(request, "vocabulary_db/words.html", context)
+
+class WordsFlashcards(View) :
+    def get(self, request, page=0) :
+        words = Word.objects.all().order_by("added", "word")
+        paginator = Paginator(words, 1) # https://youtu.be/DwaivJPY_1o?t=390
+
+        if paginator.count == 0 :
+            return render(request, "vocabulary_db/words_flashcard.html", {
+                "bool_navbar" : True,
+                "active" : "words",
+            })
+
+        page = request.GET.get("page")
+        if not page :
+            page = randint(1, paginator.count)
+
+        page_object = paginator.get_page(page)
+        context = {
+            "bool_navbar" : True,
+            "words" : page_object,
+            "active" : "words",
+        }
+
+        return render(request, "vocabulary_db/words_flashcard.html", context)
+
+class ToggleMastered(View) :
+    def post(self, request, pk) :
+        word = get_object_or_404(Word, word=pk)
+        word.mastered = not word.mastered
+        word.save()
+        if word.mastered :
+            messages.success(request, _("Mot Maîtrisé !"))
+        else :
+            messages.success(request, _("Le mot n'est plus maîtrisé !"))
+        return redirect(f"{reverse('flashcards')}?page={request.POST.get('page', 1)}")
+
+
 
 # class MyFormView(View): # https://docs.djangoproject.com/en/6.1/topics/class-based-views/intro/
 #     form_class = MyForm

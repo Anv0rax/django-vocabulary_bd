@@ -5,8 +5,31 @@
 {% block content %}
 
 <h2 class="mb-4">{% trans "Liste des mots" %}</h2>
-<a href="{% url 'add_word' %}" class="btn btn-primary mb-4">{% trans "+ Ajouter" %}</a>
-<a href="{% url 'add_word' %}" class="btn btn-primary mb-4 ms-2">{% trans "Flashcards" %}</a>
+
+
+<nav aria-label="..." class="d-flex mt-4">
+    <a href="{% url 'add_word' %}" class="btn btn-primary mb-4">{% trans "+ Ajouter" %}</a>
+    <a href="{% url 'flashcards' %}" class="btn btn-primary mb-4 ms-2">{% trans "Flashcards" %}</a>
+    <ul class="pagination ms-5">
+        <li class="page-item {% if not words.has_previous %}disabled{% endif %}">
+            <a {% if words.has_previous %}href="?page=1"{% endif %} class="page-link">&laquo;</a>
+        </li>
+        <li class="page-item {% if not words.has_previous %}disabled{% endif %}">
+            <a {% if words.has_previous %}href="?page={{ words.previous_page_number }}"{% endif %} class="page-link">{% trans "Précédente" %}</a>
+        </li>
+
+        <li class="page-item active">
+            <span class="page-link">{{ words.number }} / {{ words.paginator.num_pages }}</span>
+        </li>
+
+        <li class="page-item {% if not words.has_next %}disabled{% endif %}">
+            <a {% if words.has_next %}href="?page={{ words.next_page_number }}"{% endif %} class="page-link">{% trans "Suivante" %}</a>
+        </li>
+        <li class="page-item {% if not words.has_next %}disabled{% endif %}">
+            <a {% if words.has_next %}href="?page={{ words.paginator.num_pages }}"{% endif %} class="page-link">&raquo;</a>
+        </li>
+    </ul>
+</nav>
 
 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 justify-content-evenly">
     {% if not words %}

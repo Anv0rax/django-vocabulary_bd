@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 19:32-0400\n"
+"POT-Creation-Date: 2026-10-24 23:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,15 +22,15 @@ msgstr ""
 msgid "Liste de vocabulaire"
 msgstr "List of vocabulary"
 
-#: .\templates\base.html:88
+#: .\templates\base.html:89
 msgid "ERREUR"
 msgstr "ERROR"
 
-#: .\templates\base.html:89
+#: .\templates\base.html:90
 msgid "Page non trouvée"
 msgstr "Page not found"
 
-#: .\templates\base.html:92
+#: .\templates\base.html:93
 msgid "Revenir à l'acceuil"
 msgstr "Return to the homepage"
 
@@ -130,6 +130,7 @@ msgstr "Source"
 
 #: .\vocabulary_db\models.py:41 .\vocabulary_db\models.py:54
 #: .\vocabulary_db\templates\vocabulary_db\words.html:46
+#: .\vocabulary_db\templates\vocabulary_db\words_flashcard.html:81
 msgid "Sources"
 msgstr "Sources"
 
@@ -139,6 +140,7 @@ msgstr "Word"
 
 #: .\vocabulary_db\models.py:50
 #: .\vocabulary_db\templates\vocabulary_db\words.html:29
+#: .\vocabulary_db\templates\vocabulary_db\words_flashcard.html:64
 msgid "Traduction"
 msgstr "Translation"
 
@@ -190,6 +192,7 @@ msgstr "+ Add"
 
 #: .\vocabulary_db\templates\vocabulary_db\list_simple.html:11
 #: .\vocabulary_db\templates\vocabulary_db\words.html:13
+#: .\vocabulary_db\templates\vocabulary_db\words_flashcard.html:10
 msgid "Aucun résultat"
 msgstr "No result"
 
@@ -214,75 +217,115 @@ msgid "Flashcards"
 msgstr "Flashcards"
 
 #: .\vocabulary_db\templates\vocabulary_db\words.html:42
+#: .\vocabulary_db\templates\vocabulary_db\words_flashcard.html:77
 msgid "Maîtrise"
 msgstr "Mastery"
 
-#: .\vocabulary_db\views.py:84
+#: .\vocabulary_db\templates\vocabulary_db\words_flashcard.html:17
+#| msgid "Suivante"
+msgid "Carte suivante"
+msgstr "Next card"
+
+#: .\vocabulary_db\templates\vocabulary_db\words_flashcard.html:21
+#| msgid "Je ne maîtrise plus cette carte"
+msgid "Je ne maîtrise plus ce mot"
+msgstr "I don't master this word"
+
+#: .\vocabulary_db\templates\vocabulary_db\words_flashcard.html:23
+#| msgid "Je maîtrise cette carte"
+msgid "Je maîtrise ce mot"
+msgstr "I master this word"
+
+#: .\vocabulary_db\templates\vocabulary_db\words_flashcard.html:32
+msgid "Précédente"
+msgstr "Previous"
+
+#: .\vocabulary_db\templates\vocabulary_db\words_flashcard.html:37
+#| msgid "Ajouter un mot"
+msgid "Aller au mot"
+msgstr "Go to word"
+
+#: .\vocabulary_db\templates\vocabulary_db\words_flashcard.html:44
+msgid "Suivante"
+msgstr "Next"
+
+#: .\vocabulary_db\views.py:85
+msgid "Mot Maîtrisé !"
+msgstr "The word is now mastered"
+
+#: .\vocabulary_db\views.py:87
+msgid "Le mot n'est plus maîtrisé !"
+msgstr "The word is not longer mastered"
+
+#: .\vocabulary_db\views.py:124
 msgid "Le mot est bien ajouté à la liste !"
 msgstr "The word is correctly added !"
 
-#: .\vocabulary_db\views.py:87 .\vocabulary_db\views.py:166
-#: .\vocabulary_db\views.py:232 .\vocabulary_db\views.py:298
+#: .\vocabulary_db\views.py:127 .\vocabulary_db\views.py:206
+#: .\vocabulary_db\views.py:272 .\vocabulary_db\views.py:338
 msgid "Formulaire non valide !"
 msgstr "Invalid Form"
 
-#: .\vocabulary_db\views.py:109
+#: .\vocabulary_db\views.py:149
 msgid "Le mot est mis à jour !"
 msgstr "The word is updated"
 
-#: .\vocabulary_db\views.py:112 .\vocabulary_db\views.py:190
-#: .\vocabulary_db\views.py:256 .\vocabulary_db\views.py:322
+#: .\vocabulary_db\views.py:152 .\vocabulary_db\views.py:230
+#: .\vocabulary_db\views.py:296 .\vocabulary_db\views.py:362
 msgid "Mise à jour invalide !"
 msgstr "Invalid update"
 
-#: .\vocabulary_db\views.py:118
+#: .\vocabulary_db\views.py:158
 msgid "Le mot est supprimé !"
 msgstr "The word is deleted"
 
-#: .\vocabulary_db\views.py:128
+#: .\vocabulary_db\views.py:168
 msgid "Liste des sources"
 msgstr "List of sources"
 
-#: .\vocabulary_db\views.py:163
+#: .\vocabulary_db\views.py:203
 msgid "La source est bien ajouté à la liste !"
 msgstr "The source is correctly added"
 
-#: .\vocabulary_db\views.py:187
+#: .\vocabulary_db\views.py:227
 msgid "La source est mise à jour !"
 msgstr "The source is updated"
 
-#: .\vocabulary_db\views.py:196
+#: .\vocabulary_db\views.py:236
 msgid "La source est supprimée !"
 msgstr "The source is deleted"
 
-#: .\vocabulary_db\views.py:206
+#: .\vocabulary_db\views.py:246
 msgid "Liste des auteur•ice•s"
 msgstr "List of authors"
 
-#: .\vocabulary_db\views.py:229
+#: .\vocabulary_db\views.py:269
 msgid "L'auteur•ice est bien ajouté•e à la liste !"
 msgstr "The authors is correctly added"
 
-#: .\vocabulary_db\views.py:253
+#: .\vocabulary_db\views.py:293
 msgid "L'auteur•ice est mis•e à jour !"
 msgstr "The authors updated"
 
-#: .\vocabulary_db\views.py:262
+#: .\vocabulary_db\views.py:302
 msgid "L'auteur•ice est supprimé•e !"
 msgstr "The authors is deleted"
 
-#: .\vocabulary_db\views.py:272
+#: .\vocabulary_db\views.py:312
 msgid "Liste des types"
 msgstr "List of types"
 
-#: .\vocabulary_db\views.py:295
+#: .\vocabulary_db\views.py:335
 msgid "Le type est bien ajouté à la liste !"
 msgstr "The type is correctly added"
 
-#: .\vocabulary_db\views.py:319
+#: .\vocabulary_db\views.py:359
 msgid "Le type est mis à jour !"
 msgstr "The type is updated"
 
-#: .\vocabulary_db\views.py:328
+#: .\vocabulary_db\views.py:368
 msgid "Le type est supprimé !"
 msgstr "The type is deleted"
+
+#~ msgid "Aller à la page"
+#~ msgstr "Go to page"

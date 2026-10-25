@@ -45,3 +45,7 @@ form label:not(.form-check-label) {
     margin-bottom: 0.5rem;
     display: inline-block;
 }
+
+.z-2 {
+    z-index: 2 !important;
+}

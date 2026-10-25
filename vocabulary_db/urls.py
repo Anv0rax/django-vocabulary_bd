@@ -6,6 +6,8 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
 
     path('list/words', views.WordsList.as_view(), name="words"),
+    path('flashcards', views.WordsFlashcards.as_view(), name="flashcards"),
+    path('flashcards/mastering/<pk>', views.ToggleMastered.as_view(), name='toggle_mastered'),
     path('add/word', views.AddWord.as_view(), name="add_word"),
     path('edit/word/<str:pk>', views.EditWord.as_view(), name="edit_word"),
     path('delete/word/<str:pk>', views.DeleteWord.as_view(), name="delete_word"),

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block add_css_js %}
+{% endblock %}
+
+{% block content %}
+{% if not words %}
+    <h3 class="d-flex align-items-center justify-content-center">{% trans "Aucun résultat" %}</h3>
+{% endif %}
+
+
+{% for word in words %}
+    <div class="container mb-4 d-flex flex-wrap align-items-center justify-content-between">
+        <form action="{% url 'toggle_mastered' pk=word.word %}" method="POST" >
+            <a href="{% url 'flashcards' %}" class="mb-2 btn btn-primary">{% trans "Carte suivante" %}</a>
+            {% csrf_token %}
+            <input type="hidden" name="page" value="{{ words.number }}">
+            {% if word.mastered %}
+                <input type="submit" value="{% trans 'Je ne maîtrise plus ce mot' %}" class="mb-2 btn btn-outline-danger ms-5">
+            {% else %}
+                <input type="submit" value="{% trans 'Je maîtrise ce mot' %}" class="mb-2 btn btn-outline-success ms-5">
+            {% endif %}
+            
+        </form>
+        
+        <nav aria-label="..." class="d-flex align-items-center ms-5">
+            <ul class="pagination mb-0">
+                {% if words.has_previous %}
+                    <li class="page-item active">
+                        <a href="?page={{ words.previous_page_number }}" class="page-link">{% trans "Précédente" %}</a>
+                    </li>
+                {% endif %}
+                <li class="page-item">
+                    <form method="GET" class="d-flex">
+                        <input type="submit" value="{% trans 'Aller au mot' %}" class="page-link">
+                        <input type="number" name="page" min="1" max="{{ words.paginator.num_pages }}" value="{{ words.number }}" class="page-link" >
+                    </form>
+                </li>
+
+                {% if words.has_next %}
+                    <li class="page-item active">
+                        <a href="?page={{ words.next_page_number }}" class="page-link">{% trans "Suivante" %}</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+
+        <div class="card mb-3 h-100 position-relative">
+            <div class="card-header d-flex justify-content-between align-items-center bg-dark text-white">
+                <p class="card-text h5 mb-0">{{ word.word }}</p>
+                <p class="card-text mb-0 ms-3">
+                    {{ word.added|date:"Y-m-d" }} {# https://docs.djangoproject.com/en/6.1/ref/templates/builtins/#date #}
+                </p>
+            </div>
+
+            <div class="card-body">
+                
+                <div class="d-flex justify-content-between align-items-start">
+                    <p class="card-text mb-0">
+                        <strong>{% trans "Traduction" %} :</strong> {{ word.translation }}
+                    </p>
+                    <a href="{% url 'edit_word' pk=word.word %}" class="btn btn-primary p-2 lh-1 ms-2 flex-shrink-0 position-relative z-2" type="button">
+                        📝
+                    </a>
+                </div>
+                <hr>
+
+                {% if word.explainations is not none %}
+                    {{ word.explainations }}
+                {% endif %}
+
+                <label class="list-group-item d-flex gap-2 mt-4">
+                    <strong class="card-text mb-2">{% trans "Maîtrise" %}</strong>
+                    <input class="form-check-input flex-shrink-0 opacity-100" type="checkbox" value="" disabled {% if word.mastered %} checked {% endif %}>
+                </label>
+
+                <strong class="card-text mt-2">{% trans "Sources" %} :</strong>
+                <ul class="ms-1 ps-1">
+                {% for source in word.sources.all %} {# https://stackoverflow.com/questions/14920735/manyrelatedmanager-object-is-not-iterable #}
+                    <li class="d-flex align-items-center">
+                        <span class="d-inline-block bg-black rounded-circle p-1 me-2"></span>
+                        <a href="{% url 'source' pk=source.id %}" class="position-relative z-2">
+                            {% if source.image %}
+                                <div class="d-flex align-items-center">
+                                    <img src="{% get_media_prefix %}{{ source.image }}" style="max-width:32px; margin-right:6px;" />
+                                    {{ source }}
+                                </div>
+                            {% else %}
+                                {{ source }}
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}
